@@ -14,6 +14,8 @@ This application uses the following stack:
 ### Frontend
 - React via `create-react-app`
 - `react-router-dom`
+- `@mui/material`
+- `@emotion/react`
 
 ### Backend 
 - Spring Boot 2.5.5

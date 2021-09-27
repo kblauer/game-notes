@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from "react";
+
 import './App.css';
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import IndexPage from "./views/IndexPage";
+import TopBar from "./components/layout/TopBar";
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    return (
+        <Router>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            />
+
+            <TopBar />
+
+            <Switch>
+                <Route path="/">
+                    <IndexPage />
+                </Route>
+            </Switch>
+        </Router>
   );
 }
 
