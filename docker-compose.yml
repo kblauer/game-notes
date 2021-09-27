@@ -1,0 +1,37 @@
+# MongoDB container creation via Docker compose
+# This will create two Docker containers with MongoDB
+# and Mongo-Express respectively for local development use
+version: "3.9"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - VCAP_APP_PORT=8001
+  # Another container for the spring app, tests packaged server
+  spring:
+    build: .
+    ports:
+      - "8080:8080"
+volumes:
+  data: {}
+
+networks:
+  default:
+    name: mongodb_network
